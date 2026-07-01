@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Database credentials (if you store them in a separate file)
+config.py
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Jupyter Notebooks (if any)
+.ipynb_checkpoints/
+*.ipynb
