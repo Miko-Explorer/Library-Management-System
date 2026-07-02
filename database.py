@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'miko1605',
+    'password': 'your_password',
     'database': 'library_db',
     'port': 3306
 }
