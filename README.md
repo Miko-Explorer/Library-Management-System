@@ -240,10 +240,10 @@ Library-Management-System/
 ## Troubleshooting
 
 ### "Database connection failed"
-- Ensure MySQL Server is running
-- Verify credentials in `DB_CONFIG` inside `database.py`
-- Check that the MySQL port (default 3306) is open and not firewalled
-- For remote hosts, ensure MySQL user has remote access privileges
+- Is MySQL Server running?
+- Check credentials in `.streamlit/secrets.toml`
+- Is port 3306 open and not firewalled?
+- For remote hosts, does the MySQL user have remote access?
 
 ### "No module named 'streamlit'"
 - Dependencies are not installed. Run:
