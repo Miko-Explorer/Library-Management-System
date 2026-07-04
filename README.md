@@ -67,17 +67,13 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 
 Auto-created on first run by `database.py:init_db()`. Five tables:
 
-### `fines`
-| Column     | Type           | Constraints                    |
-|------------|----------------|--------------------------------|
-| fine_id    | INT            | PK, AUTO_INCREMENT (300)       |
-| book_id    | INT            | NOT NULL, FK → books           |
-| member_id  | INT            | NOT NULL, FK → members         |
-| amount     | DECIMAL(10,2)  | DEFAULT 0.00                   |
-| reason     | ENUM(3 vals)   | NOT NULL (Lost/Damaged/Overdue)|
-| issued_date| DATETIME       | NOT NULL                       |
-| paid       | DECIMAL(10,2)  | DEFAULT 0.00                   |
-| paid_date  | DATETIME       | NULL (NULL = unpaid)           |
+| Table     | Key Columns                                      |
+|-----------|--------------------------------------------------|
+| `books`   | `book_id` (PK), `book_title` (UNIQUE), `book_genre` (ENUM, 10 values), `year_published` |
+| `members` | `member_id` (PK, starts 100), `email` (UNIQUE), `phone` (UNIQUE), `is_active` |
+| `loans`   | `loan_id` (PK, starts 200), `book_id` (FK), `member_id` (FK), `loan_date`, `due_date`, `return_date` (NULL = active) |
+| `fines`   | `fine_id` (PK, starts 300), `book_id` (FK), `member_id` (FK), `amount`, `reason` (Lost/Damaged/Overdue), `paid`, `paid_date` |
+| `staff`   | `staff_id` (PK), `username` (UNIQUE), `email` (UNIQUE), `phone` (UNIQUE), `roles`, `hire_date`, `is_active` |
 
 ### `staff`
 | Column     | Type                | Constraints              |
