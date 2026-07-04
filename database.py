@@ -207,7 +207,7 @@ def create_fine(book_id, member_id, amount, reason, paid=0.00, paid_date=None):
         INSERT INTO fines (book_id, member_id, amount, reason, issued_date, paid, paid_date)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
-    return execute_query(query, (book_id, member_id, amount, reason, issued_date, paid, paid_date), fetch=False)
+    return query(sql, (book_id, member_id, amount, reason, issued_date, paid, paid_date), fetch=False)
 
 
 def update_loan_return(loan_id, return_date=None):
