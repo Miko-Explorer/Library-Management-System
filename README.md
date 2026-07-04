@@ -112,9 +112,7 @@ Library-Management-System/
 - **`books.py`**, **`members.py`**, **`loans.py`**, **`fines.py`**, **`staff.py`** — each exports a single `show()` function for its page
 - **`dashboard.py`** — exports `show()` with metrics + 4 Plotly charts + recent activity
 
-Each page module in `books.py`, `members.py`, `loans.py`, `fines.py`, `staff.py`, and `dashboard.py` exports a single `show()` function that renders its entire page content using Streamlit elements. `database.py` serves as the sole data access layer — all database connections, queries, and mutations go through it.
-
-### Function Reference — `database.py`
+### `database.py` Function Reference
 
 | Function                | Purpose                                          |
 |-------------------------|--------------------------------------------------|
