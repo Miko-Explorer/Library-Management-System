@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from database import get_fines, get_books, get_members, create_fine
 
-
 def show():
     tab1, tab2 = st.tabs(["View Fines", "Issue Fine"])
 
