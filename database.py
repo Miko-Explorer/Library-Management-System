@@ -145,7 +145,7 @@ def get_fines():
 
 
 def get_staff():
-    return get_table_data("staff")
+    return query("SELECT * FROM staff")
 
 
 def has_related_records(table, id_column, id_value, related_tables):
