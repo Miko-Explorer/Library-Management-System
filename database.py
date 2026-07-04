@@ -240,7 +240,7 @@ def update_loan_return(loan_id, return_date=None):
         fine_amount = days_overdue * 5
 
     if fine_amount > 0:
-        cursor.execute("""
+        query("""
             INSERT INTO fines (book_id, member_id, amount, reason, issued_date, paid, paid_date)
             VALUES (%s, %s, %s, 'Overdue', %s, 0.00, NULL)
         """, (loan['book_id'], loan['member_id'], fine_amount, return_date), fetch=False)
