@@ -1,30 +1,53 @@
+import streamlit as st
 import mysql.connector
 from mysql.connector import Error
-import streamlit as st
 from datetime import datetime, timedelta
-
-DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'your_password',
-    'database': 'library_db',
-    'port': 3306
-}
 
 DEFAULT_BOOK_PRICE = 500.00
 
-
 def get_connection():
     try:
-        conn = mysql.connector.connect(**DB_CONFIG)
-        return conn
-    except mysql.connector.Error as e:
+        return mysql.connector.connect(
+            host=st.secrets["mysql"]["host"],
+            user=st.secrets["mysql"]["user"],
+            password=st.secrets["mysql"]["password"],
+            database=st.secrets["mysql"]["database"],
+            port=st.secrets["mysql"].get("port", 3306)
+        )
+    except KeyError as e:
+        st.error(f"Missing MySQL configuration in secrets.toml: {e}")
+        return None
+    except Error as e:
         st.error(f"Database connection failed: {e}")
-        st.stop()
+        return None
 
+def query(sql, params=None, fetch=True):
+    conn = get_connection()
+    if not conn:
+        return [] if fetch else None
+    try:
+        cur = conn.cursor(dictionary=True)
+        cur.execute(sql, params or ())
+        if fetch:
+            result = cur.fetchall()
+        else:
+            conn.commit()
+            result = cur.lastrowid
+        cur.close()
+        conn.close()
+        return result
+    except Error as e:
+        st.error(f"Query error: {e}")
+        if not fetch:
+            conn.rollback()
+        cur.close()
+        conn.close()
+        return [] if fetch else None
 
 def init_db():
     conn = get_connection()
+    if not conn:
+        return
     cursor = conn.cursor()
 
     cursor.execute("CREATE DATABASE IF NOT EXISTS library_db")
@@ -100,85 +123,46 @@ def init_db():
     cursor.close()
     conn.close()
 
-
-def execute_query(query, params=None, fetch=True):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    try:
-        cursor.execute(query, params or ())
-        if fetch:
-            result = cursor.fetchall()
-        else:
-            conn.commit()
-            result = cursor.lastrowid
-        cursor.close()
-        conn.close()
-        return result
-    except mysql.connector.Error as e:
-        cursor.close()
-        conn.close()
-        st.error(f"Database error: {e}")
-        return None
-
-
-def get_table_data(table_name, columns="*", condition=None, params=None):
-    query = f"SELECT {columns} FROM {table_name}"
-    if condition:
-        query += f" WHERE {condition}"
-    return execute_query(query, params)
-
-
 def get_books():
-    return get_table_data("books")
+    return query("SELECT * FROM books")
 
 
 def get_members():
-    return get_table_data("members")
+    return query("SELECT * FROM members")
 
 
 def get_loans():
-    return get_table_data("loans")
+    return query("SELECT * FROM loans")
 
 
 def get_fines():
-    return get_table_data("fines")
+    return query("SELECT * FROM fines")
 
 
 def get_staff():
-    return get_table_data("staff")
+    return query("SELECT * FROM staff")
 
 
 def has_related_records(table, id_column, id_value, related_tables):
-    conn = get_connection()
-    cursor = conn.cursor()
     for tbl, col in related_tables:
-        cursor.execute(f"SELECT COUNT(*) FROM {tbl} WHERE {col} = %s", (id_value,))
-        count = cursor.fetchone()[0]
-        if count > 0:
-            cursor.close()
-            conn.close()
+        result = query(f"SELECT COUNT(*) AS cnt FROM {tbl} WHERE {col} = %s", (id_value,))
+        if result and result[0]['cnt'] > 0:
             return True
-    cursor.close()
-    conn.close()
     return False
 
 
 def calculate_fine(loan_id, return_date=None):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("""
+    result = query("""
         SELECT l.*, m.full_name
         FROM loans l
         JOIN members m ON l.member_id = m.member_id
         WHERE l.loan_id = %s
     """, (loan_id,))
-    loan = cursor.fetchone()
-    cursor.close()
-    conn.close()
 
-    if not loan:
+    if not result:
         return None
+
+    loan = result[0]
 
     if return_date is None:
         return_date = datetime.now()
@@ -203,36 +187,24 @@ def calculate_fine(loan_id, return_date=None):
 
 def create_fine(book_id, member_id, amount, reason, paid=0.00, paid_date=None):
     issued_date = datetime.now()
-    query = """
+    sql = """
         INSERT INTO fines (book_id, member_id, amount, reason, issued_date, paid, paid_date)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
-    return execute_query(query, (book_id, member_id, amount, reason, issued_date, paid, paid_date), fetch=False)
+    return query(sql, (book_id, member_id, amount, reason, issued_date, paid, paid_date), fetch=False)
 
 
 def update_loan_return(loan_id, return_date=None):
     if return_date is None:
         return_date = datetime.now()
 
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("""
-        SELECT l.*
-        FROM loans l
-        WHERE l.loan_id = %s
-    """, (loan_id,))
-    loan = cursor.fetchone()
-
-    if not loan:
-        cursor.close()
-        conn.close()
+    loan_data = query("SELECT l.* FROM loans l WHERE l.loan_id = %s", (loan_id,))
+    if not loan_data:
         return None
 
-    cursor.execute(
-        "UPDATE loans SET return_date = %s WHERE loan_id = %s",
-        (return_date, loan_id)
-    )
+    loan = loan_data[0]
+
+    query("UPDATE loans SET return_date = %s WHERE loan_id = %s", (return_date, loan_id), fetch=False)
 
     fine_amount = 0
     if return_date > loan['due_date']:
@@ -240,12 +212,9 @@ def update_loan_return(loan_id, return_date=None):
         fine_amount = days_overdue * 5
 
     if fine_amount > 0:
-        cursor.execute("""
+        query("""
             INSERT INTO fines (book_id, member_id, amount, reason, issued_date, paid, paid_date)
             VALUES (%s, %s, %s, 'Overdue', %s, 0.00, NULL)
-        """, (loan['book_id'], loan['member_id'], fine_amount, return_date))
+        """, (loan['book_id'], loan['member_id'], fine_amount, return_date), fetch=False)
 
-    conn.commit()
-    cursor.close()
-    conn.close()
     return {'fine_amount': fine_amount, 'days_overdue': max(0, (return_date - loan['due_date']).days)}
