@@ -262,7 +262,7 @@ Library-Management-System/
 - Check the terminal for error output on launch
 
 ### Changes not showing after CRUD
-- All CRUD operations call `st.rerun()` automatically. If data seems stale, click the sidebar page again or refresh the browser.
+- All operations call `st.rerun()` automatically. If data seems stale, re-click the sidebar page or refresh the browser.
 
 ---
 
