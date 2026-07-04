@@ -3,14 +3,6 @@ from mysql.connector import Error
 import streamlit as st
 from datetime import datetime, timedelta
 
-DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'miko1605',
-    'database': 'library_db',
-    'port': 3306
-}
-
 DEFAULT_BOOK_PRICE = 500.00
 
 def get_connection():
