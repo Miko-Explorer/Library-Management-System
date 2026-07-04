@@ -100,34 +100,6 @@ def init_db():
     cursor.close()
     conn.close()
 
-
-def execute_query(query, params=None, fetch=True):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    try:
-        cursor.execute(query, params or ())
-        if fetch:
-            result = cursor.fetchall()
-        else:
-            conn.commit()
-            result = cursor.lastrowid
-        cursor.close()
-        conn.close()
-        return result
-    except mysql.connector.Error as e:
-        cursor.close()
-        conn.close()
-        st.error(f"Database error: {e}")
-        return None
-
-
-def get_table_data(table_name, columns="*", condition=None, params=None):
-    query = f"SELECT {columns} FROM {table_name}"
-    if condition:
-        query += f" WHERE {condition}"
-    return execute_query(query, params)
-
-
 def get_books():
     return query("SELECT * FROM books")
 
