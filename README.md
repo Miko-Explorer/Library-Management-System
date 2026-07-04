@@ -90,13 +90,13 @@ Library-Management-System/
 │   ├── ERD_library_db.mwb
 │   ├── ERD_library_db.pdf
 │   └── library_sys_management (updated).sql
-├── books.py
-├── dashboard.py
-├── database.py
-├── fines.py
-├── loans.py
-├── main.py
-├── members.py
+├── books.py                       # Book CRUD
+├── dashboard.py                   # Metrics + charts
+├── database.py                    # Data access layer
+├── fines.py                       # Fine management
+├── loans.py                       # Loan lifecycle
+├── main.py                        # Entry point, routing
+├── members.py                     # Member CRUD
 ├── README.md
 ├── requirements.txt
 └── staff.py
