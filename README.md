@@ -116,21 +116,20 @@ Each page module in `books.py`, `members.py`, `loans.py`, `fines.py`, `staff.py`
 
 ### Function Reference — `database.py`
 
-| Function              | Purpose                                          |
-|-----------------------|--------------------------------------------------|
-| `get_connection()`    | Returns a MySQL connection or stops the app      |
-| `init_db()`           | Creates database and all 5 tables if missing     |
-| `execute_query()`     | Generic query executor (fetch or commit)         |
-| `get_table_data()`    | SELECT wrapper with optional WHERE clause        |
-| `get_books()`         | Fetch all books                                  |
-| `get_members()`       | Fetch all members                                |
-| `get_loans()`         | Fetch all loans                                  |
-| `get_fines()`         | Fetch all fines                                  |
-| `get_staff()`         | Fetch all staff                                  |
-| `has_related_records()`| Check foreign-key dependencies before deletion  |
-| `calculate_fine()`    | Compute overdue fine for a loan                  |
-| `create_fine()`       | INSERT a new fine record                         |
-| `update_loan_return()`| Set return date, auto-create overdue fine if due |
+| Function                | Purpose                                          |
+|-------------------------|--------------------------------------------------|
+| `get_connection()`      | Returns a MySQL connection from `st.secrets["mysql"]` |
+| `query()`               | Generic query executor (fetch rows or commit)    |
+| `init_db()`             | Creates database + all 5 tables if missing       |
+| `get_books()`           | Fetch all books                                  |
+| `get_members()`         | Fetch all members                                |
+| `get_loans()`           | Fetch all loans                                  |
+| `get_fines()`           | Fetch all fines                                  |
+| `get_staff()`           | Fetch all staff                                  |
+| `has_related_records()` | Check FK dependencies before delete              |
+| `calculate_fine()`      | Compute overdue fine for a loan                  |
+| `create_fine()`         | INSERT a new fine record                         |
+| `update_loan_return()`  | Set return date, auto-create overdue fine if due |
 
 ---
 
