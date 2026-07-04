@@ -106,23 +106,10 @@ Library-Management-System/
 
 ## Module Architecture
 
-The application follows a modular single-page architecture:
-
-```
-main.py (entry point)
-├── st.set_page_config()
-├── Custom CSS injection (glassmorphism theme)
-├── database.init_db()            # Auto-create tables
-├── Sidebar navigation (radio buttons)
-├── Routing to page modules
-│   ├── dashboard.show()          # Metrics + charts
-│   ├── books.show()              # Book CRUD
-│   ├── members.show()            # Member CRUD
-│   ├── loans.show()              # Loan management
-│   ├── fines.show()              # Fine management
-│   └── staff.show()              # Staff CRUD
-└── Footer
-```
+- **`main.py`** — entry point: page config, CSS injection, sidebar nav, routing
+- **`database.py`** — sole data access layer (all DB calls go through it)
+- **`books.py`**, **`members.py`**, **`loans.py`**, **`fines.py`**, **`staff.py`** — each exports a single `show()` function for its page
+- **`dashboard.py`** — exports `show()` with metrics + 4 Plotly charts + recent activity
 
 Each page module in `books.py`, `members.py`, `loans.py`, `fines.py`, `staff.py`, and `dashboard.py` exports a single `show()` function that renders its entire page content using Streamlit elements. `database.py` serves as the sole data access layer — all database connections, queries, and mutations go through it.
 
