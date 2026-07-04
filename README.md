@@ -172,7 +172,7 @@ Library-Management-System/
    database = "library_db"
    ```
 
-5. **Run the application**
+5. **Run the app**
    ```bash
    streamlit run main.py
    ```
