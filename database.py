@@ -129,7 +129,7 @@ def get_table_data(table_name, columns="*", condition=None, params=None):
 
 
 def get_books():
-    return get_table_data("books")
+    return query("SELECT * FROM books")
 
 
 def get_members():
