@@ -164,10 +164,7 @@ def has_related_records(table, id_column, id_value, related_tables):
 
 
 def calculate_fine(loan_id, return_date=None):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("""
+    result = query("""
         SELECT l.*, m.full_name
         FROM loans l
         JOIN members m ON l.member_id = m.member_id
