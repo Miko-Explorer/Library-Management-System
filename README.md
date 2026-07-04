@@ -85,7 +85,7 @@ Auto-created on first run by `database.py:init_db()`. Five tables:
 Library-Management-System/
 ├── .gitignore
 ├── .streamlit/
-│   └── secrets.toml
+│   └── secrets.toml               # MySQL credentials
 ├── Database & ERD/
 │   ├── ERD_library_db.mwb
 │   ├── ERD_library_db.pdf
