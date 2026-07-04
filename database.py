@@ -23,6 +23,29 @@ def get_connection():
         st.stop()
 
 
+def query(sql, params=None, fetch=True):
+    conn = get_connection()
+    if not conn:
+        return [] if fetch else None
+    try:
+        cur = conn.cursor(dictionary=True)
+        cur.execute(sql, params or ())
+        if fetch:
+            result = cur.fetchall()
+        else:
+            conn.commit()
+            result = cur.lastrowid
+        cur.close()
+        conn.close()
+        return result
+    except Error as e:
+        st.error(f"Query error: {e}")
+        if not fetch:
+            conn.rollback()
+        cur.close()
+        conn.close()
+        return [] if fetch else None
+
 def init_db():
     conn = get_connection()
     if not conn:
