@@ -191,14 +191,14 @@ Library-Management-System/
 4. **Loans > New Loan** — issue a loan by selecting a book and member
 5. **Loans > Return Book** — process a return (try a past-due date to see fines)
 
-### Daily operations workflow
-- **Adding books:** Books > Add Book tab
-- **Registering members:** Members > Add Member tab
-- **Issuing loans:** Loans > New Loan tab
-- **Processing returns:** Loans > Return Book tab (fines auto-calculated)
-- **Viewing overdue books:** Not a separate page — filter via the Loans table (look for "Active" status with past due dates)
-- **Managing fines:** Fines > View Fines / Issue Fine tabs
-- **Managing staff:** Staff > Add Staff / Update & Delete tabs
+### Daily operations
+- **Add books** → Books > Add Book tab
+- **Register members** → Members > Add Member tab
+- **Issue loans** → Loans > New Loan tab
+- **Process returns** → Loans > Return Book tab (fines auto-calculated)
+- **View overdue books** → Loans table; look for "Active" status with past due dates
+- **Manage fines** → Fines > View Fines / Issue Fine tabs
+- **Manage staff** → Staff > Add Staff / Update & Delete tabs
 
 ---
 
