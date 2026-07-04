@@ -204,8 +204,6 @@ Library-Management-System/
 
 ## Fine Calculation Logic
 
-The system uses two fine mechanisms:
-
 ### Automatic (on book return)
 - Triggered by **Loans > Return Book**
 - Formula: `days_overdue × ₱5.00`
