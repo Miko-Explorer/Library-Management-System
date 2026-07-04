@@ -42,9 +42,9 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - Delete blocked if member has associated loans or fines
 
 ### Loans Management
-- **View Loans** — table joining loans with book titles and member names, showing loan/return dates and status (Active/Returned)
-- **New Loan** — select from available books (not currently loaned) and active members; auto-sets due date 7 days from loan date
-- **Return Book** — select an active loan, choose return date; automatically calculates overdue fines (₱5/day) and records them in the fines table
+- View all loans (joins book title + member name, status: Active / Returned)
+- Issue new loan — pick from available books (not currently loaned) and active members; due date auto-set to loan date + 7 days
+- Return book — select active loan, pick return date; overdue fine (₱5/day) auto-calculated and recorded
 
 ### Fines Management
 - **View Fines** — table with book, member, amount, reason, issued date, paid amount, and status (Paid/Unpaid); summary metrics for total unpaid and total paid
