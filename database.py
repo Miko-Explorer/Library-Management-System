@@ -20,8 +20,7 @@ def get_connection():
         return conn
     except mysql.connector.Error as e:
         st.error(f"Database connection failed: {e}")
-        st.stop()
-
+        return None
 
 def query(sql, params=None, fetch=True):
     conn = get_connection()
