@@ -245,7 +245,4 @@ def update_loan_return(loan_id, return_date=None):
             VALUES (%s, %s, %s, 'Overdue', %s, 0.00, NULL)
         """, (loan['book_id'], loan['member_id'], fine_amount, return_date))
 
-    conn.commit()
-    cursor.close()
-    conn.close()
     return {'fine_amount': fine_amount, 'days_overdue': max(0, (return_date - loan['due_date']).days)}
