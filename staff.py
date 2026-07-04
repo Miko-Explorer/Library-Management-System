@@ -5,7 +5,6 @@ import re
 from datetime import datetime
 from database import get_staff, get_connection
 
-
 def show():
     tab1, tab2, tab3 = st.tabs(["View Staff", "Add Staff", "Update / Delete"])
 
