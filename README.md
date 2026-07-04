@@ -207,10 +207,13 @@ Library-Management-System/
 The system uses two fine mechanisms:
 
 ### Automatic (on book return)
-- Triggered when **Loans > Return Book** is processed
-- Calculated as: `days_overdue × ₱5.00`
-- A new record is inserted into the `fines` table with reason `"Overdue"`
-- Paid status starts at `0.00` (unpaid)
+- Triggered by **Loans > Return Book**
+- Formula: `days_overdue × ₱5.00`
+- Inserts a `fines` row with reason `"Overdue"` and `paid = 0.00`
+- Adjust daily rate in `database.py`:
+  ```python
+  fine_amount = days_overdue * 5   # Change 5 to your desired rate
+  ```
 
 ### Manual (via Fines tab)
 - Navigate to **Fines > Issue Fine**
