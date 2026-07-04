@@ -65,36 +65,7 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 
 ## Database Schema
 
-The schema is auto-created on first run by `database.py:init_db()`. Five tables:
-
-### `books`
-| Column         | Type          | Constraints              |
-|----------------|---------------|--------------------------|
-| book_id        | INT           | PK, AUTO_INCREMENT        |
-| book_title     | VARCHAR(500)  | NOT NULL, UNIQUE          |
-| book_genre     | ENUM(10 vals) | NOT NULL                  |
-| year_published | YEAR          | NOT NULL                  |
-
-### `members`
-| Column          | Type           | Constraints              |
-|-----------------|----------------|--------------------------|
-| member_id       | INT            | PK, AUTO_INCREMENT (100) |
-| full_name       | VARCHAR(100)   | NOT NULL                 |
-| email           | VARCHAR(100)   | NOT NULL, UNIQUE          |
-| phone           | VARCHAR(11)    | NOT NULL, UNIQUE          |
-| address         | VARCHAR(100)   | NOT NULL                 |
-| membership_date | DATETIME       | NOT NULL                 |
-| is_active       | ENUM(Active/Inactive) | NOT NULL          |
-
-### `loans`
-| Column      | Type     | Constraints                    |
-|-------------|----------|--------------------------------|
-| loan_id     | INT      | PK, AUTO_INCREMENT (200)       |
-| book_id     | INT      | NOT NULL, FK → books           |
-| member_id   | INT      | NOT NULL, FK → members         |
-| loan_date   | DATETIME | NOT NULL                       |
-| due_date    | DATETIME | NOT NULL                       |
-| return_date | DATETIME | NULL (NULL = not yet returned) |
+Auto-created on first run by `database.py:init_db()`. Five tables:
 
 ### `fines`
 | Column     | Type           | Constraints                    |
