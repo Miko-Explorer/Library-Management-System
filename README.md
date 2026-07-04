@@ -36,10 +36,10 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - Delete blocked if book has associated loans or fines
 
 ### Members Management
-- **View Members** — table of all members with contact info, registration date, and status
-- **Register Member** — form with name, email (regex validated), 11-digit phone (regex validated), address, and active/inactive status; duplicate detection
-- **Update Member** — edit all fields inline; validation re-applied
-- **Delete Member** — safety check prevents deletion if the member has associated loans or fines
+- View / Register / Update / Delete members
+- Email and phone regex validation
+- Duplicate detection for email and phone
+- Delete blocked if member has associated loans or fines
 
 ### Loans Management
 - **View Loans** — table joining loans with book titles and member names, showing loan/return dates and status (Active/Returned)
