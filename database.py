@@ -229,10 +229,9 @@ def update_loan_return(loan_id, return_date=None):
         conn.close()
         return None
 
-    cursor.execute(
-        "UPDATE loans SET return_date = %s WHERE loan_id = %s",
-        (return_date, loan_id)
-    )
+    loan = loan_data[0]
+
+    query("UPDATE loans SET return_date = %s WHERE loan_id = %s", (return_date, loan_id), fetch=False)
 
     fine_amount = 0
     if return_date > loan['due_date']:
