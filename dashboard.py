@@ -4,7 +4,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from database import get_books, get_members, get_loans, get_fines
 
-
 def show():
     books = get_books()
     members = get_members()
