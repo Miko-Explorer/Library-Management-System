@@ -243,6 +243,6 @@ def update_loan_return(loan_id, return_date=None):
         cursor.execute("""
             INSERT INTO fines (book_id, member_id, amount, reason, issued_date, paid, paid_date)
             VALUES (%s, %s, %s, 'Overdue', %s, 0.00, NULL)
-        """, (loan['book_id'], loan['member_id'], fine_amount, return_date))
+        """, (loan['book_id'], loan['member_id'], fine_amount, return_date), fetch=False)
 
     return {'fine_amount': fine_amount, 'days_overdue': max(0, (return_date - loan['due_date']).days)}
