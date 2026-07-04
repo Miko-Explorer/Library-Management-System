@@ -258,8 +258,8 @@ Library-Management-System/
 - Delete or resolve the related loans/fines first
 
 ### Tables not created automatically
-- Ensure the MySQL user has `CREATE DATABASE` and `CREATE TABLE` privileges
-- Check the terminal for error output when the app starts
+- Does the MySQL user have `CREATE DATABASE` / `CREATE TABLE` privileges?
+- Check the terminal for error output on launch
 
 ### Changes not showing after CRUD
 - All CRUD operations call `st.rerun()` automatically. If data seems stale, click the sidebar page again or refresh the browser.
