@@ -1,13 +1,13 @@
 # Library Management System
 
-A professional library management system built with **Streamlit** and **MySQL**, featuring a glass‑morphism dark UI, full CRUD operations across all entities, automatic overdue fine calculation, and interactive Plotly dashboards.
+- A modular library management system built with **Streamlit** and **MySQL**.
+- Full CRUD operations, automatic overdue fine calculation, and interactive Plotly dashboards in a glass‑morphism dark UI.
 
 ---
 
 ## Table of Contents
 
 - [Features](#features)
-- [Navigation Overview](#navigation-overview)
 - [Database Schema](#database-schema)
 - [Project Structure](#project-structure)
 - [Module Architecture](#module-architecture)
@@ -23,123 +23,60 @@ A professional library management system built with **Streamlit** and **MySQL**,
 ## Features
 
 ### Dashboard
-- Live key metrics: Total Books, Total Members (with active count), Active Loans, Unpaid Fines
-- **Books by Genre** — interactive bar chart (Plotly)
+- Live metrics: Total Books, Total Members (active count), Active Loans, Unpaid Fines
+- **Books by Genre** — interactive Plotly bar chart
 - **Member Status** — donut pie chart (Active vs Inactive)
-- **Loans Over Time** — spline line chart grouped by month
-- **Fine Amount Distribution** — histogram of fine amounts
-- **Recent Loan Activity** — scrollable table of the 5 most recent loans with book and member names
+- **Loans Over Time** — spline chart grouped by month
+- **Fine Amount Distribution** — histogram
+- **Recent Loan Activity** — scrollable table of the 5 latest loans
 
 ### Books Management
-- **View Books** — full table of all books with ID, title, genre, and publication year
-- **Add Book** — form with title, genre dropdown (10 genres), and year picker; duplicate title prevention
-- **Update Book** — select a book, edit title/genre/year inline
-- **Delete Book** — safety check prevents deletion if the book has associated loans or fines
+- View / Add / Update / Delete books
+- Genre dropdown (10 genres) + year picker
+- Duplicate title prevention via UNIQUE constraint
+- Delete blocked if book has associated loans or fines
 
 ### Members Management
-- **View Members** — table of all members with contact info, registration date, and status
-- **Register Member** — form with name, email (regex validated), 11-digit phone (regex validated), address, and active/inactive status; duplicate detection
-- **Update Member** — edit all fields inline; validation re-applied
-- **Delete Member** — safety check prevents deletion if the member has associated loans or fines
+- View / Register / Update / Delete members
+- Email and phone regex validation
+- Duplicate detection for email and phone
+- Delete blocked if member has associated loans or fines
 
 ### Loans Management
-- **View Loans** — table joining loans with book titles and member names, showing loan/return dates and status (Active/Returned)
-- **New Loan** — select from available books (not currently loaned) and active members; auto-sets due date 7 days from loan date
-- **Return Book** — select an active loan, choose return date; automatically calculates overdue fines (₱5/day) and records them in the fines table
+- View all loans (joins book title + member name, status: Active / Returned)
+- Issue new loan — pick from available books (not currently loaned) and active members; due date auto-set to loan date + 7 days
+- Return book — select active loan, pick return date; overdue fine (₱5/day) auto-calculated and recorded
 
 ### Fines Management
-- **View Fines** — table with book, member, amount, reason, issued date, paid amount, and status (Paid/Unpaid); summary metrics for total unpaid and total paid
-- **Issue Fine** — manually create a fine for Lost/Damaged/Overdue reasons, selecting book and member
+- View fines table with paid/unpaid status + summary totals
+- Manually issue fines (Lost / Damaged / Overdue)
 
 ### Staff Management
-- **View Staff** — table of all staff with username, contact info, role, hire date, and status
-- **Add Staff** — form with validation for email format and 11-digit phone; duplicate detection for name, username, email, and phone
-- **Update Staff** — edit all fields inline with validation
-- **Delete Staff** — direct deletion (no dependency checks)
+- View / Add / Update / Delete staff
+- Validation: email format, 11-digit phone, duplicate checks on name/username/email/phone
+- No foreign-key dependency checks on delete
 
 ### UI / UX
-- **Glass-morphism Theme** — dark gradient background, blurred glass cards, custom scrollbar, professional typography (Inter font)
-- **Toast Notifications** — fading success/error toasts on every CRUD operation
-- **Tab-based Navigation** — each page uses tabs to separate view/add/update/delete workflows
-- **Sidebar Status** — database connection indicator and system version
-
----
-
-## Navigation Overview
-
-The sidebar provides 6 navigation pages:
-
-| Page       | Iconless Label | Tabs Inside                              |
-|------------|----------------|------------------------------------------|
-| Dashboard  | Dashboard      | Metrics + 4 charts + recent activity     |
-| Books      | Books          | View Books / Add Book / Update & Delete  |
-| Members    | Members        | View Members / Add Member / Update & Delete |
-| Loans      | Loans          | View Loans / New Loan / Return Book      |
-| Fines      | Fines          | View Fines / Issue Fine                  |
-| Staff      | Staff          | View Staff / Add Staff / Update & Delete |
+- Glass-morphism theme: dark gradient, blurred cards, custom scrollbar, Inter font
+- Toast notifications on every CRUD operation
+- Tab-based navigation per page (view / add / update / delete)
+- Sidebar with 6 pages + database status indicator
 
 ---
 
 ## Database Schema
 
-The schema is auto-created on first run by `database.py:init_db()`. Five tables:
+Auto-created on first run by `database.py:init_db()`. Five tables:
 
-### `books`
-| Column         | Type          | Constraints              |
-|----------------|---------------|--------------------------|
-| book_id        | INT           | PK, AUTO_INCREMENT        |
-| book_title     | VARCHAR(500)  | NOT NULL, UNIQUE          |
-| book_genre     | ENUM(10 vals) | NOT NULL                  |
-| year_published | YEAR          | NOT NULL                  |
+| Table     | Key Columns                                      |
+|-----------|--------------------------------------------------|
+| `books`   | `book_id` (PK), `book_title` (UNIQUE), `book_genre` (ENUM, 10 values), `year_published` |
+| `members` | `member_id` (PK, starts 100), `email` (UNIQUE), `phone` (UNIQUE), `is_active` |
+| `loans`   | `loan_id` (PK, starts 200), `book_id` (FK), `member_id` (FK), `loan_date`, `due_date`, `return_date` (NULL = active) |
+| `fines`   | `fine_id` (PK, starts 300), `book_id` (FK), `member_id` (FK), `amount`, `reason` (Lost/Damaged/Overdue), `paid`, `paid_date` |
+| `staff`   | `staff_id` (PK), `username` (UNIQUE), `email` (UNIQUE), `phone` (UNIQUE), `roles`, `hire_date`, `is_active` |
 
-### `members`
-| Column          | Type           | Constraints              |
-|-----------------|----------------|--------------------------|
-| member_id       | INT            | PK, AUTO_INCREMENT (100) |
-| full_name       | VARCHAR(100)   | NOT NULL                 |
-| email           | VARCHAR(100)   | NOT NULL, UNIQUE          |
-| phone           | VARCHAR(11)    | NOT NULL, UNIQUE          |
-| address         | VARCHAR(100)   | NOT NULL                 |
-| membership_date | DATETIME       | NOT NULL                 |
-| is_active       | ENUM(Active/Inactive) | NOT NULL          |
-
-### `loans`
-| Column      | Type     | Constraints                    |
-|-------------|----------|--------------------------------|
-| loan_id     | INT      | PK, AUTO_INCREMENT (200)       |
-| book_id     | INT      | NOT NULL, FK → books           |
-| member_id   | INT      | NOT NULL, FK → members         |
-| loan_date   | DATETIME | NOT NULL                       |
-| due_date    | DATETIME | NOT NULL                       |
-| return_date | DATETIME | NULL (NULL = not yet returned) |
-
-### `fines`
-| Column     | Type           | Constraints                    |
-|------------|----------------|--------------------------------|
-| fine_id    | INT            | PK, AUTO_INCREMENT (300)       |
-| book_id    | INT            | NOT NULL, FK → books           |
-| member_id  | INT            | NOT NULL, FK → members         |
-| amount     | DECIMAL(10,2)  | DEFAULT 0.00                   |
-| reason     | ENUM(3 vals)   | NOT NULL (Lost/Damaged/Overdue)|
-| issued_date| DATETIME       | NOT NULL                       |
-| paid       | DECIMAL(10,2)  | DEFAULT 0.00                   |
-| paid_date  | DATETIME       | NULL (NULL = unpaid)           |
-
-### `staff`
-| Column     | Type                | Constraints              |
-|------------|---------------------|--------------------------|
-| staff_id   | INT                 | PK, AUTO_INCREMENT       |
-| full_name  | VARCHAR(100)        | NOT NULL                 |
-| username   | VARCHAR(100)        | NOT NULL, UNIQUE          |
-| email      | VARCHAR(100)        | NOT NULL, UNIQUE          |
-| phone      | VARCHAR(11)         | NOT NULL, UNIQUE          |
-| address    | VARCHAR(100)        | NOT NULL                 |
-| roles      | ENUM(3 vals)        | NULLable                  |
-| hire_date  | DATE                | NOT NULL                 |
-| last_login | DATETIME            | NOT NULL                 |
-| is_active  | ENUM(Active/Inactive)| NOT NULL                 |
-
-> Reference DDL: `Database & ERD/library_sys_management (updated).sql`
+- Reference DDL: `Database & ERD/library_sys_management (updated).sql`
 
 ---
 
@@ -149,78 +86,61 @@ The schema is auto-created on first run by `database.py:init_db()`. Five tables:
 Library-Management-System/
 ├── .gitignore
 ├── .streamlit/
-│   └── secrets.toml
+│   └── secrets.toml               # MySQL credentials
 ├── Database & ERD/
 │   ├── ERD_library_db.mwb
 │   ├── ERD_library_db.pdf
 │   └── library_sys_management (updated).sql
-├── books.py
-├── dashboard.py
-├── database.py
-├── fines.py
-├── loans.py
-├── main.py
-├── members.py
+├── books.py                       # Book CRUD
+├── dashboard.py                   # Metrics + charts
+├── database.py                    # Data access layer
+├── fines.py                       # Fine management
+├── loans.py                       # Loan lifecycle
+├── main.py                        # Entry point, routing
+├── members.py                     # Member CRUD
 ├── README.md
 ├── requirements.txt
-└── staff.py
+└── staff.py                       # Staff CRUD
 ```
 
 ---
 
 ## Module Architecture
 
-The application follows a modular single-page architecture:
+- **`main.py`** — entry point: page config, CSS injection, sidebar nav, routing
+- **`database.py`** — sole data access layer (all DB calls go through it)
+- **`books.py`**, **`members.py`**, **`loans.py`**, **`fines.py`**, **`staff.py`** — each exports a single `show()` function for its page
+- **`dashboard.py`** — exports `show()` with metrics + 4 Plotly charts + recent activity
 
-```
-main.py (entry point)
-├── st.set_page_config()
-├── Custom CSS injection (glassmorphism theme)
-├── database.init_db()            # Auto-create tables
-├── Sidebar navigation (radio buttons)
-├── Routing to page modules
-│   ├── dashboard.show()          # Metrics + charts
-│   ├── books.show()              # Book CRUD
-│   ├── members.show()            # Member CRUD
-│   ├── loans.show()              # Loan management
-│   ├── fines.show()              # Fine management
-│   └── staff.show()              # Staff CRUD
-└── Footer
-```
+### `database.py` Function Reference
 
-Each page module in `books.py`, `members.py`, `loans.py`, `fines.py`, `staff.py`, and `dashboard.py` exports a single `show()` function that renders its entire page content using Streamlit elements. `database.py` serves as the sole data access layer — all database connections, queries, and mutations go through it.
-
-### Function Reference — `database.py`
-
-| Function              | Purpose                                          |
-|-----------------------|--------------------------------------------------|
-| `get_connection()`    | Returns a MySQL connection or stops the app      |
-| `init_db()`           | Creates database and all 5 tables if missing     |
-| `execute_query()`     | Generic query executor (fetch or commit)         |
-| `get_table_data()`    | SELECT wrapper with optional WHERE clause        |
-| `get_books()`         | Fetch all books                                  |
-| `get_members()`       | Fetch all members                                |
-| `get_loans()`         | Fetch all loans                                  |
-| `get_fines()`         | Fetch all fines                                  |
-| `get_staff()`         | Fetch all staff                                  |
-| `has_related_records()`| Check foreign-key dependencies before deletion  |
-| `calculate_fine()`    | Compute overdue fine for a loan                  |
-| `create_fine()`       | INSERT a new fine record                         |
-| `update_loan_return()`| Set return date, auto-create overdue fine if due |
+| Function                | Purpose                                          |
+|-------------------------|--------------------------------------------------|
+| `get_connection()`      | Returns a MySQL connection from `st.secrets["mysql"]` |
+| `query()`               | Generic query executor (fetch rows or commit)    |
+| `init_db()`             | Creates database + all 5 tables if missing       |
+| `get_books()`           | Fetch all books                                  |
+| `get_members()`         | Fetch all members                                |
+| `get_loans()`           | Fetch all loans                                  |
+| `get_fines()`           | Fetch all fines                                  |
+| `get_staff()`           | Fetch all staff                                  |
+| `has_related_records()` | Check FK dependencies before delete              |
+| `calculate_fine()`      | Compute overdue fine for a loan                  |
+| `create_fine()`         | INSERT a new fine record                         |
+| `update_loan_return()`  | Set return date, auto-create overdue fine if due |
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-
-- **Python 3.8+** installed on your system
-- **MySQL Server** running (local or remote)
+- **Python 3.8+**
+- **MySQL Server** (local or remote)
 - **pip** package manager
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone the repo**
    ```bash
    git clone <repository-url>
    cd Library-Management-System
@@ -242,20 +162,7 @@ Each page module in `books.py`, `members.py`, `loans.py`, `fines.py`, `staff.py`
    pip install -r requirements.txt
    ```
 
-4. **Configure database credentials**
-
-   Edit `database.py` and update the `DB_CONFIG` dictionary:
-   ```python
-   DB_CONFIG = {
-       'host': 'localhost',
-       'user': 'root',
-       'password': 'your_mysql_password',
-       'database': 'library_db',
-       'port': 3306
-   }
-   ```
-
-   Alternatively, configure `.streamlit/secrets.toml`:
+4. **Configure MySQL credentials** in `.streamlit/secrets.toml`
    ```toml
    [mysql]
    host = "localhost"
@@ -265,112 +172,103 @@ Each page module in `books.py`, `members.py`, `loans.py`, `fines.py`, `staff.py`
    database = "library_db"
    ```
 
-5. **Run the application**
+5. **Run the app**
    ```bash
    streamlit run main.py
    ```
 
-6. **Open your browser** and navigate to **http://localhost:8501**
-
-   > The database tables are created automatically on first launch.
+6. **Open** http://localhost:8501 in your browser
+   - Tables are created automatically on first launch
 
 ---
 
 ## Usage Guide
 
 ### First-time setup
-1. Launch the app — tables are created automatically.
-2. Go to **Books** > **Add Book** and add several books across different genres.
-3. Go to **Members** > **Add Member** and register at least one active member.
-4. Go to **Loans** > **New Loan** and issue a loan by selecting a book and member.
-5. Go to **Loans** > **Return Book** to process a return (try a date past due to see fines).
+1. Launch the app — tables auto-create
+2. **Books > Add Book** — add several books across different genres
+3. **Members > Add Member** — register at least one active member
+4. **Loans > New Loan** — issue a loan by selecting a book and member
+5. **Loans > Return Book** — process a return (try a past-due date to see fines)
 
-### Daily operations workflow
-- **Adding books:** Books > Add Book tab
-- **Registering members:** Members > Add Member tab
-- **Issuing loans:** Loans > New Loan tab
-- **Processing returns:** Loans > Return Book tab (fines auto-calculated)
-- **Viewing overdue books:** Not a separate page — filter via the Loans table (look for "Active" status with past due dates)
-- **Managing fines:** Fines > View Fines / Issue Fine tabs
-- **Managing staff:** Staff > Add Staff / Update & Delete tabs
+### Daily operations
+- **Add books** → Books > Add Book tab
+- **Register members** → Members > Add Member tab
+- **Issue loans** → Loans > New Loan tab
+- **Process returns** → Loans > Return Book tab (fines auto-calculated)
+- **View overdue books** → Loans table; look for "Active" status with past due dates
+- **Manage fines** → Fines > View Fines / Issue Fine tabs
+- **Manage staff** → Staff > Add Staff / Update & Delete tabs
 
 ---
 
 ## Fine Calculation Logic
 
-The system uses two fine mechanisms:
-
 ### Automatic (on book return)
-- Triggered when **Loans > Return Book** is processed
-- Calculated as: `days_overdue × ₱5.00`
-- A new record is inserted into the `fines` table with reason `"Overdue"`
-- Paid status starts at `0.00` (unpaid)
+- Triggered by **Loans > Return Book**
+- Formula: `days_overdue × ₱5.00`
+- Inserts a `fines` row with reason `"Overdue"` and `paid = 0.00`
+- Adjust daily rate in `database.py`:
+  ```python
+  fine_amount = days_overdue * 5   # Change 5 to your desired rate
+  ```
 
 ### Manual (via Fines tab)
 - Navigate to **Fines > Issue Fine**
 - Select book, member, reason (Lost/Damaged/Overdue), and amount
-- Useful for lost books, physical damage, or retroactive fines
-
-### Adjusting the fine rate
-Edit the rate in `database.py`:
-```python
-fine_amount = days_overdue * 5   # Change 5 to your desired daily rate
-```
-
-### Adjusting lost/damaged book price
-Edit in `database.py`:
-```python
-DEFAULT_BOOK_PRICE = 500.00      # Default value for lost/damaged calculations
-```
+- Used for lost books, physical damage, or retroactive fines
+- Adjust default book price in `database.py`:
+  ```python
+  DEFAULT_BOOK_PRICE = 500.00
+  ```
 
 ---
 
 ## Technologies
 
-| Layer       | Technology                          |
-|-------------|-------------------------------------|
-| **UI**      | Streamlit 1.23+                     |
-| **Charts**  | Plotly Express, Plotly Graph Objects |
-| **Data**    | Pandas                              |
-| **Database**| MySQL (via mysql-connector-python)  |
-| **Styling** | Custom CSS (glassmorphism, Inter font, dark theme) |
-| **Language**| Python 3.8+                         |
+| Layer       | Technology                              |
+|-------------|----------------------------------------|
+| **UI**      | Streamlit 1.23+                        |
+| **Charts**  | Plotly Express, Plotly Graph Objects   |
+| **Data**    | Pandas                                 |
+| **Database**| MySQL (mysql-connector-python)         |
+| **Styling** | Custom CSS (glassmorphism, dark theme) |
+| **Language**| Python 3.8+                            |
 
 ---
 
 ## Troubleshooting
 
 ### "Database connection failed"
-- Ensure MySQL Server is running
-- Verify credentials in `DB_CONFIG` inside `database.py`
-- Check that the MySQL port (default 3306) is open and not firewalled
-- For remote hosts, ensure MySQL user has remote access privileges
+- Is MySQL Server running?
+- Check credentials in `.streamlit/secrets.toml`
+- Is port 3306 open and not firewalled?
+- For remote hosts, does the MySQL user have remote access?
 
 ### "No module named 'streamlit'"
-- Dependencies are not installed. Run:
+- Dependencies not installed:
   ```bash
   pip install -r requirements.txt
   ```
 
 ### "A book with this title already exists"
-- The `book_title` column has a UNIQUE constraint. Titles must be unique.
+- `book_title` has a UNIQUE constraint — titles must be unique
 
-### "Cannot delete this book because it has associated loans or fines"
-- The book has records in the `loans` or `fines` tables. Delete those first, or mark them as returned/paid.
+### "Cannot delete this book/member because it has associated loans or fines"
+- Delete or resolve the related loans/fines first
 
 ### Tables not created automatically
-- Ensure the MySQL user has `CREATE DATABASE` and `CREATE TABLE` privileges
-- Check the terminal for error output when the app starts
+- Does the MySQL user have `CREATE DATABASE` / `CREATE TABLE` privileges?
+- Check the terminal for error output on launch
 
 ### Changes not showing after CRUD
-- All CRUD operations call `st.rerun()` automatically. If data seems stale, click the sidebar page again or refresh the browser.
+- All operations call `st.rerun()` automatically. If data seems stale, re-click the sidebar page or refresh the browser.
 
 ---
 
 ## Author
 
-**Enrico Miguel Veloso**  
-enrico.veloso1605@gmail.com
+**Enrico Miguel Veloso** — enrico.veloso1605@gmail.com
 
 ---
 
