@@ -177,9 +177,8 @@ Library-Management-System/
    streamlit run main.py
    ```
 
-6. **Open your browser** and navigate to **http://localhost:8501**
-
-   > The database tables are created automatically on first launch.
+6. **Open** http://localhost:8501 in your browser
+   - Tables are created automatically on first launch
 
 ---
 
