@@ -133,7 +133,7 @@ def get_books():
 
 
 def get_members():
-    return get_table_data("members")
+    return query("SELECT * FROM members")
 
 
 def get_loans():
