@@ -22,8 +22,8 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 ## Features
 
 ### Dashboard
-- Live key metrics: Total Books, Total Members (with active count), Active Loans, Unpaid Fines
-- **Books by Genre** — interactive bar chart (Plotly)
+- Live metrics: Total Books, Total Members (active count), Active Loans, Unpaid Fines
+- **Books by Genre** — interactive Plotly bar chart
 - **Member Status** — donut pie chart (Active vs Inactive)
 - **Loans Over Time** — spline line chart grouped by month
 - **Fine Amount Distribution** — histogram of fine amounts
