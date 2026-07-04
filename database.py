@@ -141,7 +141,7 @@ def get_loans():
 
 
 def get_fines():
-    return get_table_data("fines")
+    return query("SELECT * FROM fines")
 
 
 def get_staff():
