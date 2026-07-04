@@ -5,7 +5,6 @@ import re
 from datetime import datetime
 from database import get_members, get_connection, has_related_records
 
-
 def show():
     tab1, tab2, tab3 = st.tabs(["View Members", "Add Member", "Update / Delete"])
 
