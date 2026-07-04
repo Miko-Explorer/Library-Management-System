@@ -1,6 +1,5 @@
 import mysql.connector
 from mysql.connector import Error
-import streamlit as st
 from datetime import datetime, timedelta
 
 DEFAULT_BOOK_PRICE = 500.00
