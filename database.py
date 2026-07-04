@@ -214,19 +214,8 @@ def update_loan_return(loan_id, return_date=None):
     if return_date is None:
         return_date = datetime.now()
 
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("""
-        SELECT l.*
-        FROM loans l
-        WHERE l.loan_id = %s
-    """, (loan_id,))
-    loan = cursor.fetchone()
-
-    if not loan:
-        cursor.close()
-        conn.close()
+    loan_data = query("SELECT l.* FROM loans l WHERE l.loan_id = %s", (loan_id,))
+    if not loan_data:
         return None
 
     loan = loan_data[0]
