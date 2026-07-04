@@ -162,20 +162,7 @@ Library-Management-System/
    pip install -r requirements.txt
    ```
 
-4. **Configure database credentials**
-
-   Edit `database.py` and update the `DB_CONFIG` dictionary:
-   ```python
-   DB_CONFIG = {
-       'host': 'localhost',
-       'user': 'root',
-       'password': 'your_mysql_password',
-       'database': 'library_db',
-       'port': 3306
-   }
-   ```
-
-   Alternatively, configure `.streamlit/secrets.toml`:
+4. **Configure MySQL credentials** in `.streamlit/secrets.toml`
    ```toml
    [mysql]
    host = "localhost"
