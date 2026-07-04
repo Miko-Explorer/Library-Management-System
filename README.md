@@ -226,14 +226,14 @@ Library-Management-System/
 
 ## Technologies
 
-| Layer       | Technology                          |
-|-------------|-------------------------------------|
-| **UI**      | Streamlit 1.23+                     |
-| **Charts**  | Plotly Express, Plotly Graph Objects |
-| **Data**    | Pandas                              |
-| **Database**| MySQL (via mysql-connector-python)  |
-| **Styling** | Custom CSS (glassmorphism, Inter font, dark theme) |
-| **Language**| Python 3.8+                         |
+| Layer       | Technology                              |
+|-------------|----------------------------------------|
+| **UI**      | Streamlit 1.23+                        |
+| **Charts**  | Plotly Express, Plotly Graph Objects   |
+| **Data**    | Pandas                                 |
+| **Database**| MySQL (mysql-connector-python)         |
+| **Styling** | Custom CSS (glassmorphism, dark theme) |
+| **Language**| Python 3.8+                            |
 
 ---
 
