@@ -246,7 +246,7 @@ Library-Management-System/
 - For remote hosts, does the MySQL user have remote access?
 
 ### "No module named 'streamlit'"
-- Dependencies are not installed. Run:
+- Dependencies not installed:
   ```bash
   pip install -r requirements.txt
   ```
