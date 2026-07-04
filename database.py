@@ -180,6 +180,8 @@ def calculate_fine(loan_id, return_date=None):
     if not loan:
         return None
 
+    loan = result[0]
+
     if return_date is None:
         return_date = datetime.now()
 
