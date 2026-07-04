@@ -16,9 +16,17 @@ DEFAULT_BOOK_PRICE = 500.00
 
 def get_connection():
     try:
-        conn = mysql.connector.connect(**DB_CONFIG)
-        return conn
-    except mysql.connector.Error as e:
+        return mysql.connector.connect(
+            host=st.secrets["mysql"]["host"],
+            user=st.secrets["mysql"]["user"],
+            password=st.secrets["mysql"]["password"],
+            database=st.secrets["mysql"]["database"],
+            port=st.secrets["mysql"].get("port", 3306)
+        )
+    except KeyError as e:
+        st.error(f"Missing MySQL configuration in secrets.toml: {e}")
+        return None
+    except Error as e:
         st.error(f"Database connection failed: {e}")
         return None
 
