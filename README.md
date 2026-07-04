@@ -1,6 +1,6 @@
 # Library Management System
 
-A professional library management system built with **Streamlit** and **MySQL**, featuring a glass‑morphism dark UI, full CRUD operations across all entities, automatic overdue fine calculation, and interactive Plotly dashboards.
+A modular library management system built with **Streamlit** and **MySQL** — full CRUD operations, automatic overdue fine calculation, and interactive Plotly dashboards in a glass‑morphism dark UI.
 
 ---
 
