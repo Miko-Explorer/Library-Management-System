@@ -254,8 +254,8 @@ Library-Management-System/
 ### "A book with this title already exists"
 - `book_title` has a UNIQUE constraint — titles must be unique
 
-### "Cannot delete this book because it has associated loans or fines"
-- The book has records in the `loans` or `fines` tables. Delete those first, or mark them as returned/paid.
+### "Cannot delete this book/member because it has associated loans or fines"
+- Delete or resolve the related loans/fines first
 
 ### Tables not created automatically
 - Ensure the MySQL user has `CREATE DATABASE` and `CREATE TABLE` privileges
