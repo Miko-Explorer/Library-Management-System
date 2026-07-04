@@ -268,8 +268,7 @@ Library-Management-System/
 
 ## Author
 
-**Enrico Miguel Veloso**  
-enrico.veloso1605@gmail.com
+**Enrico Miguel Veloso** — enrico.veloso1605@gmail.com
 
 ---
 
