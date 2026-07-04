@@ -4,7 +4,6 @@ import mysql.connector
 from datetime import datetime
 from database import get_books, get_connection, has_related_records
 
-
 def show():
     tab1, tab2, tab3 = st.tabs(["View Books", "Add Book", "Update / Delete"])
 
