@@ -177,7 +177,7 @@ def calculate_fine(loan_id, return_date=None):
     cursor.close()
     conn.close()
 
-    if not loan:
+    if not result:
         return None
 
     loan = result[0]
