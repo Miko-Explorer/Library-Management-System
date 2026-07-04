@@ -158,8 +158,6 @@ def has_related_records(table, id_column, id_value, related_tables):
             cursor.close()
             conn.close()
             return True
-    cursor.close()
-    conn.close()
     return False
 
 
