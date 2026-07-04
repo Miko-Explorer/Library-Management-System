@@ -99,7 +99,7 @@ Library-Management-System/
 ├── members.py                     # Member CRUD
 ├── README.md
 ├── requirements.txt
-└── staff.py
+└── staff.py                       # Staff CRUD
 ```
 
 ---
