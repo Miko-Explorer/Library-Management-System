@@ -134,9 +134,8 @@ Library-Management-System/
 ## Getting Started
 
 ### Prerequisites
-
-- **Python 3.8+** installed on your system
-- **MySQL Server** running (local or remote)
+- **Python 3.8+**
+- **MySQL Server** (local or remote)
 - **pip** package manager
 
 ### Installation
