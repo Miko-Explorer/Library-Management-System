@@ -173,9 +173,6 @@ def calculate_fine(loan_id, return_date=None):
         JOIN members m ON l.member_id = m.member_id
         WHERE l.loan_id = %s
     """, (loan_id,))
-    loan = cursor.fetchone()
-    cursor.close()
-    conn.close()
 
     if not result:
         return None
