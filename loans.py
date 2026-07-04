@@ -3,7 +3,6 @@ import pandas as pd
 from datetime import datetime, timedelta
 from database import get_loans, get_books, get_members, get_connection, update_loan_return
 
-
 def show():
     tab1, tab2, tab3 = st.tabs(["View Loans", "New Loan", "Return Book"])
 
