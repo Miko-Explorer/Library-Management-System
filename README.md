@@ -75,21 +75,7 @@ Auto-created on first run by `database.py:init_db()`. Five tables:
 | `fines`   | `fine_id` (PK, starts 300), `book_id` (FK), `member_id` (FK), `amount`, `reason` (Lost/Damaged/Overdue), `paid`, `paid_date` |
 | `staff`   | `staff_id` (PK), `username` (UNIQUE), `email` (UNIQUE), `phone` (UNIQUE), `roles`, `hire_date`, `is_active` |
 
-### `staff`
-| Column     | Type                | Constraints              |
-|------------|---------------------|--------------------------|
-| staff_id   | INT                 | PK, AUTO_INCREMENT       |
-| full_name  | VARCHAR(100)        | NOT NULL                 |
-| username   | VARCHAR(100)        | NOT NULL, UNIQUE          |
-| email      | VARCHAR(100)        | NOT NULL, UNIQUE          |
-| phone      | VARCHAR(11)         | NOT NULL, UNIQUE          |
-| address    | VARCHAR(100)        | NOT NULL                 |
-| roles      | ENUM(3 vals)        | NULLable                  |
-| hire_date  | DATE                | NOT NULL                 |
-| last_login | DATETIME            | NOT NULL                 |
-| is_active  | ENUM(Active/Inactive)| NOT NULL                 |
-
-> Reference DDL: `Database & ERD/library_sys_management (updated).sql`
+- Reference DDL: `Database & ERD/library_sys_management (updated).sql`
 
 ---
 
