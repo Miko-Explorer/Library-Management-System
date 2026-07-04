@@ -149,8 +149,6 @@ def get_staff():
 
 
 def has_related_records(table, id_column, id_value, related_tables):
-    conn = get_connection()
-    cursor = conn.cursor()
     for tbl, col in related_tables:
         result = query(f"SELECT COUNT(*) AS cnt FROM {tbl} WHERE {col} = %s", (id_value,))
         if result and result[0]['cnt'] > 0:
