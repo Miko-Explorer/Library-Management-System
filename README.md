@@ -185,11 +185,11 @@ Library-Management-System/
 ## Usage Guide
 
 ### First-time setup
-1. Launch the app — tables are created automatically.
-2. Go to **Books** > **Add Book** and add several books across different genres.
-3. Go to **Members** > **Add Member** and register at least one active member.
-4. Go to **Loans** > **New Loan** and issue a loan by selecting a book and member.
-5. Go to **Loans** > **Return Book** to process a return (try a date past due to see fines).
+1. Launch the app — tables auto-create
+2. **Books > Add Book** — add several books across different genres
+3. **Members > Add Member** — register at least one active member
+4. **Loans > New Loan** — issue a loan by selecting a book and member
+5. **Loans > Return Book** — process a return (try a past-due date to see fines)
 
 ### Daily operations workflow
 - **Adding books:** Books > Add Book tab
