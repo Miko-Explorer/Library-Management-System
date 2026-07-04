@@ -137,7 +137,7 @@ def get_members():
 
 
 def get_loans():
-    return get_table_data("loans")
+    return query("SELECT * FROM loans")
 
 
 def get_fines():
