@@ -203,7 +203,7 @@ def calculate_fine(loan_id, return_date=None):
 
 def create_fine(book_id, member_id, amount, reason, paid=0.00, paid_date=None):
     issued_date = datetime.now()
-    query = """
+    sql = """
         INSERT INTO fines (book_id, member_id, amount, reason, issued_date, paid, paid_date)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
