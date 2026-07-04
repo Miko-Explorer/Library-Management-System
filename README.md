@@ -47,8 +47,8 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - Return book — select active loan, pick return date; overdue fine (₱5/day) auto-calculated and recorded
 
 ### Fines Management
-- **View Fines** — table with book, member, amount, reason, issued date, paid amount, and status (Paid/Unpaid); summary metrics for total unpaid and total paid
-- **Issue Fine** — manually create a fine for Lost/Damaged/Overdue reasons, selecting book and member
+- View fines table with paid/unpaid status + summary totals
+- Manually issue fines (Lost / Damaged / Overdue)
 
 ### Staff Management
 - **View Staff** — table of all staff with username, contact info, role, hire date, and status
