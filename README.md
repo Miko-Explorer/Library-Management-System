@@ -140,7 +140,7 @@ Library-Management-System/
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone the repo**
    ```bash
    git clone <repository-url>
    cd Library-Management-System
