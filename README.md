@@ -7,7 +7,6 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 ## Table of Contents
 
 - [Features](#features)
-- [Navigation Overview](#navigation-overview)
 - [Database Schema](#database-schema)
 - [Project Structure](#project-structure)
 - [Module Architecture](#module-architecture)
