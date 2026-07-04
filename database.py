@@ -25,6 +25,8 @@ def get_connection():
 
 def init_db():
     conn = get_connection()
+    if not conn:
+        return
     cursor = conn.cursor()
 
     cursor.execute("CREATE DATABASE IF NOT EXISTS library_db")
