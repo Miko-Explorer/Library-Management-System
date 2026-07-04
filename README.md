@@ -51,10 +51,9 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - Manually issue fines (Lost / Damaged / Overdue)
 
 ### Staff Management
-- **View Staff** — table of all staff with username, contact info, role, hire date, and status
-- **Add Staff** — form with validation for email format and 11-digit phone; duplicate detection for name, username, email, and phone
-- **Update Staff** — edit all fields inline with validation
-- **Delete Staff** — direct deletion (no dependency checks)
+- View / Add / Update / Delete staff
+- Validation: email format, 11-digit phone, duplicate checks on name/username/email/phone
+- No foreign-key dependency checks on delete
 
 ### UI / UX
 - **Glass-morphism Theme** — dark gradient background, blurred glass cards, custom scrollbar, professional typography (Inter font)
