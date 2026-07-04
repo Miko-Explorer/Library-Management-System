@@ -56,25 +56,10 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - No foreign-key dependency checks on delete
 
 ### UI / UX
-- **Glass-morphism Theme** — dark gradient background, blurred glass cards, custom scrollbar, professional typography (Inter font)
-- **Toast Notifications** — fading success/error toasts on every CRUD operation
-- **Tab-based Navigation** — each page uses tabs to separate view/add/update/delete workflows
-- **Sidebar Status** — database connection indicator and system version
-
----
-
-## Navigation Overview
-
-The sidebar provides 6 navigation pages:
-
-| Page       | Iconless Label | Tabs Inside                              |
-|------------|----------------|------------------------------------------|
-| Dashboard  | Dashboard      | Metrics + 4 charts + recent activity     |
-| Books      | Books          | View Books / Add Book / Update & Delete  |
-| Members    | Members        | View Members / Add Member / Update & Delete |
-| Loans      | Loans          | View Loans / New Loan / Return Book      |
-| Fines      | Fines          | View Fines / Issue Fine                  |
-| Staff      | Staff          | View Staff / Add Staff / Update & Delete |
+- Glass-morphism theme: dark gradient, blurred cards, custom scrollbar, Inter font
+- Toast notifications on every CRUD operation
+- Tab-based navigation per page (view / add / update / delete)
+- Sidebar with 6 pages + database status indicator
 
 ---
 
