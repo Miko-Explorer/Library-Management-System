@@ -30,10 +30,10 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - **Recent Loan Activity** — scrollable table of the 5 latest loans
 
 ### Books Management
-- **View Books** — full table of all books with ID, title, genre, and publication year
-- **Add Book** — form with title, genre dropdown (10 genres), and year picker; duplicate title prevention
-- **Update Book** — select a book, edit title/genre/year inline
-- **Delete Book** — safety check prevents deletion if the book has associated loans or fines
+- View / Add / Update / Delete books
+- Genre dropdown (10 genres) + year picker
+- Duplicate title prevention via UNIQUE constraint
+- Delete blocked if book has associated loans or fines
 
 ### Members Management
 - **View Members** — table of all members with contact info, registration date, and status
