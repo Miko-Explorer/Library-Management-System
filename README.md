@@ -25,9 +25,9 @@ A modular library management system built with **Streamlit** and **MySQL** — f
 - Live metrics: Total Books, Total Members (active count), Active Loans, Unpaid Fines
 - **Books by Genre** — interactive Plotly bar chart
 - **Member Status** — donut pie chart (Active vs Inactive)
-- **Loans Over Time** — spline line chart grouped by month
-- **Fine Amount Distribution** — histogram of fine amounts
-- **Recent Loan Activity** — scrollable table of the 5 most recent loans with book and member names
+- **Loans Over Time** — spline chart grouped by month
+- **Fine Amount Distribution** — histogram
+- **Recent Loan Activity** — scrollable table of the 5 latest loans
 
 ### Books Management
 - **View Books** — full table of all books with ID, title, genre, and publication year
