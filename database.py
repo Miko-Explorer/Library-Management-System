@@ -152,11 +152,8 @@ def has_related_records(table, id_column, id_value, related_tables):
     conn = get_connection()
     cursor = conn.cursor()
     for tbl, col in related_tables:
-        cursor.execute(f"SELECT COUNT(*) FROM {tbl} WHERE {col} = %s", (id_value,))
-        count = cursor.fetchone()[0]
-        if count > 0:
-            cursor.close()
-            conn.close()
+        result = query(f"SELECT COUNT(*) AS cnt FROM {tbl} WHERE {col} = %s", (id_value,))
+        if result and result[0]['cnt'] > 0:
             return True
     return False
 
