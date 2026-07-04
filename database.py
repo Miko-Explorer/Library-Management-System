@@ -13,7 +13,6 @@ DB_CONFIG = {
 
 DEFAULT_BOOK_PRICE = 500.00
 
-
 def get_connection():
     try:
         return mysql.connector.connect(
