@@ -252,7 +252,7 @@ Library-Management-System/
   ```
 
 ### "A book with this title already exists"
-- The `book_title` column has a UNIQUE constraint. Titles must be unique.
+- `book_title` has a UNIQUE constraint — titles must be unique
 
 ### "Cannot delete this book because it has associated loans or fines"
 - The book has records in the `loans` or `fines` tables. Delete those first, or mark them as returned/paid.
