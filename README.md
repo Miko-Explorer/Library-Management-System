@@ -201,8 +201,16 @@ Library-Management-System/
 
 ## Application modules
 
-### "A book with this title already exists"
-- `book_title` has a UNIQUE constraint — titles must be unique
+| Module | File | Role |
+|---|---|---|
+| **Entry point** | `main.py` | Page config, glassmorphism CSS, sidebar radio nav, page routing to 6 modules |
+| **Database layer** | `database.py` | `get_connection()` + `query()` helpers; `init_db()` auto-creates tables |
+| **Dashboard** | `dashboard.py` | `show()` — key metrics, 4 Plotly charts, recent loan activity table |
+| **Books management** | `books.py` | `show()` — full CRUD with genre/year filtering and FK dependency checks |
+| **Members management** | `members.py` | `show()` — full CRUD with email/phone validation and FK dependency checks |
+| **Loans management** | `loans.py` | `show()` — full CRUD with auto due-date, return processing, and fine calculation |
+| **Fines management** | `fines.py` | `show()` — full CRUD with paid/unpaid totals and manual fine issue |
+| **Staff management** | `staff.py` | `show()` — full CRUD with email/phone validation |
 
 ### "Cannot delete this book/member because it has associated loans or fines"
 - Delete or resolve the related loans/fines first
