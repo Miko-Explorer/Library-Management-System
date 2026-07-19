@@ -92,15 +92,16 @@ Library-Management-System/
   pip install -r requirements.txt
   ```
 
-4. **Configure MySQL credentials** in `.streamlit/secrets.toml`
-   ```toml
-   [mysql]
-   host = "localhost"
-   port = 3306
-   user = "root"
-   password = "your_mysql_password"
-   database = "library_db"
-   ```
+- **Configure `.streamlit/secrets.toml`** with MySQL credentials:
+  ```toml
+  [mysql]
+  host = "localhost"
+  port = 3306
+  user = "root"
+  password = "your_mysql_password"
+  database = "library_db"
+  ```
+  > Never commit this file — it's in `.gitignore`.
 
 5. **Run the app**
    ```bash
