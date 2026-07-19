@@ -229,7 +229,10 @@ Library-Management-System/
 
 ## Security
 
-**Enrico Miguel Veloso** — enrico.veloso1605@gmail.com
+- **SQL injection prevention** — all queries use parameterized statements (`%s` placeholders) via `mysql.connector`
+- **Credential protection** — database credentials in `.streamlit/secrets.toml` (excluded via `.gitignore`)
+- **Input validation** — field types, email/phone regex patterns, and constraints enforced at UI level before any query
+- **Error handling** — connection and query errors caught without exposing system internals
 
 ---
 
