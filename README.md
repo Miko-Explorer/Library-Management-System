@@ -214,9 +214,7 @@ Library-Management-System/
 
 ---
 
-### Tables not created automatically
-- Does the MySQL user have `CREATE DATABASE` / `CREATE TABLE` privileges?
-- Check the terminal for error output on launch
+## UI / UX
 
 ### Changes not showing after CRUD
 - All operations call `st.rerun()` automatically. If data seems stale, re-click the sidebar page or refresh the browser.
