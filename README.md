@@ -212,8 +212,7 @@ Library-Management-System/
 | **Fines management** | `fines.py` | `show()` — full CRUD with paid/unpaid totals and manual fine issue |
 | **Staff management** | `staff.py` | `show()` — full CRUD with email/phone validation |
 
-### "Cannot delete this book/member because it has associated loans or fines"
-- Delete or resolve the related loans/fines first
+---
 
 ### Tables not created automatically
 - Does the MySQL user have `CREATE DATABASE` / `CREATE TABLE` privileges?
