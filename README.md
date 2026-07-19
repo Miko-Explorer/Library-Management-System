@@ -78,29 +78,11 @@ Library-Management-System/
 
 ## Quick start
 
-### Prerequisites
-- **Python 3.8+**
-- **MySQL Server** (local or remote)
-- **pip** package manager
-
-### Installation
-
-1. **Clone the repo**
-   ```bash
-   git clone <repository-url>
-   cd Library-Management-System
-   ```
-
-2. **Create and activate a virtual environment** (recommended)
-   ```bash
-   # Windows
-   python -m venv venv
-   venv\Scripts\activate
-
-   # macOS / Linux
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
+- **Clone the repo:**
+  ```bash
+  git clone https://github.com/Miko-Explorer/MySQL-Based-Projects.git
+  cd "MySQL-Based-Projects/Library Management System"
+  ```
 
 3. **Install dependencies**
    ```bash
