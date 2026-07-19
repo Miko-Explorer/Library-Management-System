@@ -1,4 +1,4 @@
-# Library Management System
+# LibSys — Library Management System
 
 - A modular library management system built with **Streamlit** and **MySQL**.
 - CRUD operations, automatic overdue fine calculation, & interactive Plotly dashboards in glass‑morphism dark UI.
