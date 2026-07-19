@@ -25,45 +25,12 @@
 
 ## Features
 
-### Dashboard
-- Live metrics: Total Books, Total Members (active count), Active Loans, Unpaid Fines
-- **Books by Genre** — interactive Plotly bar chart
-- **Member Status** — donut pie chart (Active vs Inactive)
-- **Loans Over Time** — spline chart grouped by month
-- **Fine Amount Distribution** — histogram
-- **Recent Loan Activity** — scrollable table of the 5 latest loans
-
-### Books Management
-- View / Add / Update / Delete books
-- Genre dropdown (10 genres) + year picker
-- Duplicate title prevention via UNIQUE constraint
-- Delete blocked if book has associated loans or fines
-
-### Members Management
-- View / Register / Update / Delete members
-- Email and phone regex validation
-- Duplicate detection for email and phone
-- Delete blocked if member has associated loans or fines
-
-### Loans Management
-- View all loans (joins book title + member name, status: Active / Returned)
-- Issue new loan — pick from available books (not currently loaned) and active members; due date auto-set to loan date + 7 days
-- Return book — select active loan, pick return date; overdue fine (₱5/day) auto-calculated and recorded
-
-### Fines Management
-- View fines table with paid/unpaid status + summary totals
-- Manually issue fines (Lost / Damaged / Overdue)
-
-### Staff Management
-- View / Add / Update / Delete staff
-- Validation: email format, 11-digit phone, duplicate checks on name/username/email/phone
-- No foreign-key dependency checks on delete
-
-### UI / UX
-- Glass-morphism theme: dark gradient, blurred cards, custom scrollbar, Inter font
-- Toast notifications on every CRUD operation
-- Tab-based navigation per page (view / add / update / delete)
-- Sidebar with 6 pages + database status indicator
+- **Dashboard** — real-time system statistics (total books, members, active loans, unpaid fines); 4 interactive Plotly charts (genre bar, member status donut, loans-over-time spline, fine histogram); recent loan activity feed
+- **Books management** — full CRUD; genre dropdown (10 genres); duplicate title prevention; delete blocked if book has associated loans or fines
+- **Members management** — full CRUD; email and phone regex validation; duplicate detection (email, phone); delete blocked if member has associated loans or fines
+- **Loans management** — full CRUD; issue new loans (auto due date = loan date + 7 days); return book with overdue fine auto-calculation (₱5/day); available books filter (excludes currently loaned)
+- **Fines management** — full CRUD; view with paid/unpaid totals; manual fine issue (Lost / Damaged / Overdue); auto-fine on overdue book return
+- **Staff management** — full CRUD; email, phone, and duplicate validation (name, username, email, phone); no foreign-key dependency checks on delete
 
 ---
 
