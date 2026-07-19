@@ -34,7 +34,7 @@
 
 ---
 
-## Database Schema
+## Tech stack
 
 Auto-created on first run by `database.py:init_db()`. Five tables:
 
