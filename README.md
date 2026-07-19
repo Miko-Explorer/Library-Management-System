@@ -236,4 +236,25 @@ Library-Management-System/
 
 ---
 
-*Library Management System v2.0 — Built with Streamlit & MySQL*
+## Development & testing
+
+- **Run locally:** ensure MySQL is running with `library_db` created, then `streamlit run main.py`
+- **Schema changes:** update `database.py:init_db()` and corresponding SQL files if altering table columns or constraints
+- **Fine rate:** daily overdue rate is `5` (line in `database.py:calculate_fine`); adjust as needed
+- **Testing:** no test suite yet. Consider:
+  - Unit tests for CRUD operations with a mock DB connection
+  - Integration tests with a dedicated test database
+  - `streamlit.testing` for UI component tests
+
+---
+
+## Contributing
+
+- Fork the repo, create a feature branch (`feat/your-feature`), make changes, and open a PR.
+- Avoid committing secrets or large binaries.
+
+---
+
+## Contact
+
+Maintained by **Miko-Explorer** — open an issue on [GitHub](https://github.com/Miko-Explorer/MySQL-Based-Projects).
