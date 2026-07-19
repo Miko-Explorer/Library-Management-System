@@ -216,8 +216,14 @@ Library-Management-System/
 
 ## UI / UX
 
-### Changes not showing after CRUD
-- All operations call `st.rerun()` automatically. If data seems stale, re-click the sidebar page or refresh the browser.
+- **Dark glassmorphism theme** — `#0a0e1a`–`#0d1225` backgrounds with blue radial gradient glows
+- **Frosted-glass panels** — `backdrop-filter: blur(20px)` on sidebar, stat cards, buttons, and form fields
+- **Custom styling** — rounded inputs (12px), styled scrollbars, glow hover effects, gradient accent buttons
+- **Responsive layout** — `wide` mode with full-width tables and adaptive components
+- **Inter font** — clean sans-serif typography via Google Fonts
+- **Sidebar** — radio menu with 6 pages (Dashboard, Books, Members, Loans, Fines, Staff); connection status + system info
+- **Tab-based workflows** — each page uses tabs to separate view / add / update / delete operations
+- **Notifications** — fading success/error toasts on every CRUD operation via `st.toast` / custom error banners
 
 ---
 
