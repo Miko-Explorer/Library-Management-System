@@ -257,4 +257,4 @@ Library-Management-System/
 
 ## Contact
 
-Maintained by **Miko-Explorer** — open an issue on [GitHub](https://github.com/Miko-Explorer/MySQL-Based-Projects).
+Maintained by **Miko-Explorer** — open an issue on [GitHub](https://github.com/Miko-Explorer/Library-Management-System).
