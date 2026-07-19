@@ -118,34 +118,88 @@ Library-Management-System/
 - Scripts live in `Database & ERD/`.
 - **Run in order:**
 
+  1. **Create database and tables:**
+     ```bash
+     mysql -u root -p < "Database & ERD/library_sys_management (updated).sql"
+     ```
+     Creates `library_db`, all 5 tables (`books`, `members`, `loans`, `fines`, `staff`) with FKs and CHECK/ENUM constraints.
+
+  2. **(Optional) Insert sample data:**
+     ```bash
+     mysql -u root -p library_db < "Database & ERD/sample_library_entries.sql"
+     ```
+     Adds 50+ entries per table (books, members, loans, fines, staff) for testing.
+
+- Alternatively, execute the SQL files in MySQL Workbench or any MySQL client.
+- On first app launch, `database.py:init_db()` also auto-creates tables if they don't exist.
+
 ---
 
-## Technologies
+## Database schema
 
-| Layer       | Technology                              |
-|-------------|----------------------------------------|
-| **UI**      | Streamlit 1.23+                        |
-| **Charts**  | Plotly Express, Plotly Graph Objects   |
-| **Data**    | Pandas                                 |
-| **Database**| MySQL (mysql-connector-python)         |
-| **Styling** | Custom CSS (glassmorphism, dark theme) |
-| **Language**| Python 3.8+                            |
+### `books` table
+
+| Column | Type | Constraints |
+|---|---|---|
+| `book_id` | `INT` | `PRIMARY KEY`, `AUTO_INCREMENT` |
+| `book_title` | `VARCHAR(500)` | `NOT NULL`, `UNIQUE` |
+| `book_genre` | `ENUM('Action Adventure','Classics','Fantasy','Graphic Novels','Historical Fiction','Horror','Mystery','Romance','Sci-Fi','Suspense/Thriller')` | `NOT NULL` |
+| `year_published` | `YEAR` | `NOT NULL` |
+
+### `members` table
+
+| Column | Type | Constraints |
+|---|---|---|
+| `member_id` | `INT` | `PRIMARY KEY`, `AUTO_INCREMENT` (starts 100) |
+| `full_name` | `VARCHAR(100)` | `NOT NULL` |
+| `email` | `VARCHAR(100)` | `NOT NULL`, `UNIQUE` |
+| `phone` | `VARCHAR(11)` | `NOT NULL`, `UNIQUE` |
+| `address` | `VARCHAR(100)` | `NOT NULL` |
+| `membership_date` | `DATETIME` | `NOT NULL` |
+| `is_active` | `ENUM('Active','Inactive')` | `NOT NULL` |
+
+### `loans` table
+
+| Column | Type | Constraints |
+|---|---|---|
+| `loan_id` | `INT` | `PRIMARY KEY`, `AUTO_INCREMENT` (starts 200) |
+| `book_id` | `INT` | `NOT NULL`, `FK → books(book_id)` |
+| `member_id` | `INT` | `NOT NULL`, `FK → members(member_id)` |
+| `loan_date` | `DATETIME` | `NOT NULL` |
+| `due_date` | `DATETIME` | `NOT NULL` |
+| `return_date` | `DATETIME` | `NULL` (NULL = active / not yet returned) |
+
+### `fines` table
+
+| Column | Type | Constraints |
+|---|---|---|
+| `fine_id` | `INT` | `PRIMARY KEY`, `AUTO_INCREMENT` (starts 300) |
+| `book_id` | `INT` | `NOT NULL`, `FK → books(book_id)` |
+| `member_id` | `INT` | `NOT NULL`, `FK → members(member_id)` |
+| `amount` | `DECIMAL(10,2)` | `DEFAULT 0.00` |
+| `reason` | `ENUM('Lost','Damaged','Overdue')` | `NOT NULL` |
+| `issued_date` | `DATETIME` | `NOT NULL` |
+| `paid` | `DECIMAL(10,2)` | `DEFAULT 0.00` |
+| `paid_date` | `DATETIME` | `NULL` (NULL = unpaid) |
+
+### `staff` table
+
+| Column | Type | Constraints |
+|---|---|---|
+| `staff_id` | `INT` | `PRIMARY KEY`, `AUTO_INCREMENT` |
+| `full_name` | `VARCHAR(100)` | `NOT NULL` |
+| `username` | `VARCHAR(100)` | `NOT NULL`, `UNIQUE` |
+| `email` | `VARCHAR(100)` | `NOT NULL`, `UNIQUE` |
+| `phone` | `VARCHAR(11)` | `NOT NULL`, `UNIQUE` |
+| `address` | `VARCHAR(100)` | `NOT NULL` |
+| `roles` | `ENUM('Admin','Librarian','Asst. Librarian')` | |
+| `hire_date` | `DATE` | `NOT NULL` |
+| `last_login` | `DATETIME` | `NOT NULL` |
+| `is_active` | `ENUM('Active','Inactive')` | `NOT NULL` |
 
 ---
 
-## Troubleshooting
-
-### "Database connection failed"
-- Is MySQL Server running?
-- Check credentials in `.streamlit/secrets.toml`
-- Is port 3306 open and not firewalled?
-- For remote hosts, does the MySQL user have remote access?
-
-### "No module named 'streamlit'"
-- Dependencies not installed:
-  ```bash
-  pip install -r requirements.txt
-  ```
+## Application modules
 
 ### "A book with this title already exists"
 - `book_title` has a UNIQUE constraint — titles must be unique
