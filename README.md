@@ -54,23 +54,24 @@ See `requirements.txt` for pinned versions.
 
 ```
 Library-Management-System/
-├── .gitignore
-├── .streamlit/
-│   └── secrets.toml               # MySQL credentials
-├── Database & ERD/
-│   ├── ERD_library_db.mwb
-│   ├── ERD_library_db.pdf
-│   └── library_sys_management (updated).sql
-├── books.py                       # Book CRUD
-├── dashboard.py                   # Metrics + charts
-├── database.py                    # Data access layer
-├── fines.py                       # Fine management
-├── loans.py                       # Loan lifecycle
-├── main.py                        # Entry point, routing
-├── members.py                     # Member CRUD
-├── README.md
-├── requirements.txt
-└── staff.py                       # Staff CRUD
+├─ .gitignore                           # Ignores secrets, cache, venvs, IDE files
+├─ .streamlit/
+│  └─ secrets.toml                      # MySQL credentials (git-ignored)
+├─ Database & ERD/
+│  ├─ ERD_library_db.mwb                # MySQL Workbench model
+│  ├─ ERD_library_db.pdf                # ERD diagram (PDF)
+│  ├─ library_sys_management (updated).sql  # DB + tables DDL
+│  └─ sample_library_entries.sql        # 50+ sample records per table
+├─ books.py                             # Book CRUD
+├─ dashboard.py                         # Dashboard metrics + charts
+├─ database.py                          # Connection + query helpers
+├─ fines.py                             # Fine management
+├─ loans.py                             # Loan lifecycle
+├─ main.py                              # App entry, CSS theme, routing
+├─ members.py                           # Member CRUD
+├─ README.md                            # This file
+├─ requirements.txt                     # Python dependencies
+└─ staff.py                             # Staff CRUD
 ```
 
 ---
