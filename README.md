@@ -227,7 +227,7 @@ Library-Management-System/
 
 ---
 
-## Author
+## Security
 
 **Enrico Miguel Veloso** — enrico.veloso1605@gmail.com
 
