@@ -76,33 +76,7 @@ Library-Management-System/
 
 ---
 
-## Module Architecture
-
-- **`main.py`** — entry point: page config, CSS injection, sidebar nav, routing
-- **`database.py`** — sole data access layer (all DB calls go through it)
-- **`books.py`**, **`members.py`**, **`loans.py`**, **`fines.py`**, **`staff.py`** — each exports a single `show()` function for its page
-- **`dashboard.py`** — exports `show()` with metrics + 4 Plotly charts + recent activity
-
-### `database.py` Function Reference
-
-| Function                | Purpose                                          |
-|-------------------------|--------------------------------------------------|
-| `get_connection()`      | Returns a MySQL connection from `st.secrets["mysql"]` |
-| `query()`               | Generic query executor (fetch rows or commit)    |
-| `init_db()`             | Creates database + all 5 tables if missing       |
-| `get_books()`           | Fetch all books                                  |
-| `get_members()`         | Fetch all members                                |
-| `get_loans()`           | Fetch all loans                                  |
-| `get_fines()`           | Fetch all fines                                  |
-| `get_staff()`           | Fetch all staff                                  |
-| `has_related_records()` | Check FK dependencies before delete              |
-| `calculate_fine()`      | Compute overdue fine for a loan                  |
-| `create_fine()`         | INSERT a new fine record                         |
-| `update_loan_return()`  | Set return date, auto-create overdue fine if due |
-
----
-
-## Getting Started
+## Quick start
 
 ### Prerequisites
 - **Python 3.8+**
