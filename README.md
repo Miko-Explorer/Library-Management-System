@@ -84,10 +84,13 @@ Library-Management-System/
   cd "MySQL-Based-Projects/Library Management System"
   ```
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+- **Set up a virtual environment and install deps:**
+  ```bash
+  python -m venv .venv
+  source .venv/bin/activate            # Linux/macOS
+  .venv\Scripts\activate               # Windows
+  pip install -r requirements.txt
+  ```
 
 4. **Configure MySQL credentials** in `.streamlit/secrets.toml`
    ```toml
