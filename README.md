@@ -113,16 +113,7 @@ Library-Management-System/
 
 ---
 
-## Fine Calculation Logic
-
-### Automatic (on book return)
-- Triggered by **Loans > Return Book**
-- Formula: `days_overdue × ₱5.00`
-- Inserts a `fines` row with reason `"Overdue"` and `paid = 0.00`
-- Adjust daily rate in `database.py`:
-  ```python
-  fine_amount = days_overdue * 5   # Change 5 to your desired rate
-  ```
+## Database setup
 
 ### Manual (via Fines tab)
 - Navigate to **Fines > Issue Fine**
