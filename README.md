@@ -8,15 +8,18 @@
 ## Table of Contents
 
 - [Features](#features)
-- [Database Schema](#database-schema)
-- [Project Structure](#project-structure)
-- [Module Architecture](#module-architecture)
-- [Getting Started](#getting-started)
-- [Usage Guide](#usage-guide)
-- [Fine Calculation Logic](#fine-calculation-logic)
-- [Technologies](#technologies)
-- [Troubleshooting](#troubleshooting)
-- [Author](#author)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Quick start](#quick-start)
+- [Database setup](#database-setup)
+- [Database schema](#database-schema)
+- [Application modules](#application-modules)
+- [UI / UX](#ui--ux)
+- [Security](#security)
+- [Development & testing](#development--testing)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
