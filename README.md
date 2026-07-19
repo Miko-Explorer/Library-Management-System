@@ -36,7 +36,15 @@
 
 ## Tech stack
 
-Auto-created on first run by `database.py:init_db()`. Five tables:
+| Component | Technology |
+|---|---|
+| Language | Python 3.8+ |
+| Web framework | Streamlit 1.23+ |
+| Data manipulation | pandas 1.5+ |
+| DB connector | mysql-connector-python 8.0+ |
+| Charts | Plotly 5.0+ |
+| Database server | MySQL 8.0+ |
+| UI styling | Custom CSS (glassmorphism dark theme) |
 
 | Table     | Key Columns                                      |
 |-----------|--------------------------------------------------|
