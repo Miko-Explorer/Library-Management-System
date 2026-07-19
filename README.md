@@ -50,7 +50,7 @@ See `requirements.txt` for pinned versions.
 
 ---
 
-## Project Structure
+## Project structure
 
 ```
 Library-Management-System/
