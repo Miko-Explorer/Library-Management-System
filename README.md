@@ -115,14 +115,8 @@ Library-Management-System/
 
 ## Database setup
 
-### Manual (via Fines tab)
-- Navigate to **Fines > Issue Fine**
-- Select book, member, reason (Lost/Damaged/Overdue), and amount
-- Used for lost books, physical damage, or retroactive fines
-- Adjust default book price in `database.py`:
-  ```python
-  DEFAULT_BOOK_PRICE = 500.00
-  ```
+- Scripts live in `Database & ERD/`.
+- **Run in order:**
 
 ---
 
