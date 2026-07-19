@@ -103,33 +103,13 @@ Library-Management-System/
   ```
   > Never commit this file — it's in `.gitignore`.
 
-5. **Run the app**
-   ```bash
-   streamlit run main.py
-   ```
+- **Run database scripts** (see [Database setup](#database-setup)).
 
-6. **Open** http://localhost:8501 in your browser
-   - Tables are created automatically on first launch
-
----
-
-## Usage Guide
-
-### First-time setup
-1. Launch the app — tables auto-create
-2. **Books > Add Book** — add several books across different genres
-3. **Members > Add Member** — register at least one active member
-4. **Loans > New Loan** — issue a loan by selecting a book and member
-5. **Loans > Return Book** — process a return (try a past-due date to see fines)
-
-### Daily operations
-- **Add books** → Books > Add Book tab
-- **Register members** → Members > Add Member tab
-- **Issue loans** → Loans > New Loan tab
-- **Process returns** → Loans > Return Book tab (fines auto-calculated)
-- **View overdue books** → Loans table; look for "Active" status with past due dates
-- **Manage fines** → Fines > View Fines / Issue Fine tabs
-- **Manage staff** → Staff > Add Staff / Update & Delete tabs
+- **Launch the app:**
+  ```bash
+  streamlit run main.py
+  ```
+  Open `http://localhost:8501`.
 
 ---
 
