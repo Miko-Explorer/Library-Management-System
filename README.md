@@ -46,15 +46,7 @@
 | Database server | MySQL 8.0+ |
 | UI styling | Custom CSS (glassmorphism dark theme) |
 
-| Table     | Key Columns                                      |
-|-----------|--------------------------------------------------|
-| `books`   | `book_id` (PK), `book_title` (UNIQUE), `book_genre` (ENUM, 10 values), `year_published` |
-| `members` | `member_id` (PK, starts 100), `email` (UNIQUE), `phone` (UNIQUE), `is_active` |
-| `loans`   | `loan_id` (PK, starts 200), `book_id` (FK), `member_id` (FK), `loan_date`, `due_date`, `return_date` (NULL = active) |
-| `fines`   | `fine_id` (PK, starts 300), `book_id` (FK), `member_id` (FK), `amount`, `reason` (Lost/Damaged/Overdue), `paid`, `paid_date` |
-| `staff`   | `staff_id` (PK), `username` (UNIQUE), `email` (UNIQUE), `phone` (UNIQUE), `roles`, `hire_date`, `is_active` |
-
-- Reference DDL: `Database & ERD/library_sys_management (updated).sql`
+See `requirements.txt` for pinned versions.
 
 ---
 
